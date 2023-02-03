@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumir API</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+</head>
+<body>
+    
+    <div class="container">
+      <h2>API Curso Javascript</h2>
+      <div class="container" id='contenedor'></div>
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+
+    <script>
+        function pintarTareas(res) {
+          let cadena = "";
+          for (const tarea of res) {
+            cadena += tarea.title;
+            cadena += "<button name='id' value='" + tarea._id + "'> x </button>";
+            cadena += '<br>';
+          }
+          return cadena;
+        }
+
+        //Cuando cargue la página llama a inicio, donde tendré los escuchadores de los eventos
+        window.addEventListener("load" ,inicio);
+
+        //Función que escucha los eventos
+        function inicio() {
+          fetch('http://34.202.234.187:3000/api/task/')
+            .then( res => {
+              if (!res.ok) {
+                  throw new Error(res.error)
+              }
+              return res.json();
+            })
+            .then(res => document.getElementById('contenedor').innerHTML = pintarTareas(res))
+            .catch( err => console.log(err));
+        }
+
+        document.getElementById("contenedor").addEventListener("click", async function(e)  {
+            e.preventDefault(); //Para no enviar el form
+            let botonBorrar = e.target.closest("button[name=id]");
+
+            fetch('http://34.202.234.187:3000/api/task/'+botonBorrar.value, { method: 'DELETE' })
+            .then( res => {
+              if (!res.ok) {
+                  throw new Error(res.error)
+              }
+              return res.json();
+            })
+            .then(res => {
+                    alert(res.msg);
+                    inicio() })
+            .catch( err => console.log(err));
+        });
+
+    </script>
+</body>
+</html>
