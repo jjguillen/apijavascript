@@ -37,7 +37,13 @@
 
         //Función que escucha los eventos
         function inicio() {
-          fetch('http://34.202.234.187:3000/api/task/')
+
+          myHeaders = new Headers({
+            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGQzMDU4YzU0ZDJhY2I1NTcyNDk0YyIsImVtYWlsIjoiampAZ21haWwuY29tIiwiaWF0IjoxNjc1NDQwODM3LCJleHAiOjE2NzU0ODQwMzd9.kUo4R-SuIP1EQoZZxns-kfYpuql2i2gXRZKAY1MQupU',
+            'Content-Type': 'application/x-www-form-urlencoded'
+          });
+
+          fetch('http://34.202.234.187:3000/api/task/', { headers: myHeaders })
             .then( res => {
               if (!res.ok) {
                   throw new Error(res.error)
