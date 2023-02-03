@@ -1,0 +1,20 @@
+{
+    "name" : "node-express",
+    "version": "0.0.1",
+    "description": "Api Rest tareas",
+    "main": "index.js",
+    "author": "Javier Guillén",
+    "license" : "MIT",
+    "scripts": {
+        "start": "nodemon -L index.js"
+    },
+    "dependencies": {
+        "express": "^4.17.2",
+        "nodemon": "^2.0.15",
+        "mongoose": "^6.1.8",
+        "cors": "^2.8.5",
+        "moment": "^2.29.1",
+        "jsonwebtoken": "^8.5.1",
+        "bcryptjs": "^2.4.3"
+    }
+}
