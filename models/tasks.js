@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+
+//Esquema de la colleción en Mongo
 const Schema = mongoose.Schema;
 
 const TaskSchema = Schema({
@@ -18,7 +20,7 @@ const TaskSchema = Schema({
     created_at: {
         type: Date,
         require: true,
-        default: Date.now
+        default: Date.now,
     }
 });
 
