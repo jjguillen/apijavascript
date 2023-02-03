@@ -43,7 +43,7 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           });
 
-          fetch('http://34.202.234.187:3000/api/task/', { headers: myHeaders })
+          fetch('http://34.202.234.187:3000/api/task/', { headers: myHeaders, method: 'GET' })
             .then( res => {
               if (!res.ok) {
                   throw new Error(res.error)
