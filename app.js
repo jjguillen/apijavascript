@@ -1,5 +1,8 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
+
+app.use(cors());
 
 //Respuestas van a ser json
 app.use(express.json());
